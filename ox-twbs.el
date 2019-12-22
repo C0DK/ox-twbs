@@ -44,7 +44,6 @@
 (require 'format-spec)
 (eval-when-compile (require 'cl) (require 'table nil 'noerror))
 
-
 ;;; Function Declarations
 
 (declare-function org-id-find-id-file "org-id" (id))
@@ -148,7 +147,6 @@
     ;; Retrieve LaTeX header for fragments.
     (:latex-header "LATEX_HEADER" nil nil newline)))
 
-
 ;;; Internal Variables
 
 (defvar org-twbs-format-table-no-css)
@@ -177,7 +175,7 @@ $(function() {
 });
 </script>"
   "Basic JavaScript that is needed by HTML files produced by Org mode.")
-
+;; TODO use seperate file
 (defconst org-twbs-style-default
   "<style type=\"text/css\">
 /* org mode styles on top of twbs */
@@ -188,8 +186,37 @@ html {
 }
 
 body {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 105px;
+    color: #d8dee9;
+    background-color: rgb(36, 41, 51); /*#2e3440;*/
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 10;
+}
+
+.container {
+    margin-top: 5vh;
+    background-color: #2e3440;
+    border-radius: 10px;
+    padding: 50px;
+
+}
+b {
+    color: #eceff4;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #eceff4;
+    margin-left: -10px;
+}
+h1 {
+    text-align: center;
+    margin-top: 10vh;
+    margin-bottom: 3vh;
+}
+pre, code {
+    color: #d8dee9;
+    background-color: #3b4252;
+    border: 0;
 }
 
 footer {
@@ -197,7 +224,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 101px;
-    background-color: #f5f5f5;
+    background-color: rgb(36, 41, 51);
 }
 
 footer > div {
@@ -209,9 +236,11 @@ footer p {
     text-align: center;
     font-size: 16px;
 }
-
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #f9f9f9;
+}
 #table-of-contents {
-    margin-top: 20px;
+    margin-top: 4vh;
     margin-bottom: 20px;
 }
 
@@ -251,24 +280,24 @@ figcaption {
     padding: 4px 20px;
     font-size: 14px;
     font-weight: 500;
-    color: #999;
+    color: #4c566a;
 }
 .bs-docs-sidebar .nav > li > a:hover,
 .bs-docs-sidebar .nav > li > a:focus {
     padding-left: 19px;
-    color: #A1283B;
+    color: #bf616a;
     text-decoration: none;
     background-color: transparent;
-    border-left: 1px solid #A1283B;
+    border-left: 1px solid #bf616a;
 }
 .bs-docs-sidebar .nav > .active > a,
 .bs-docs-sidebar .nav > .active:hover > a,
 .bs-docs-sidebar .nav > .active:focus > a {
     padding-left: 18px;
     font-weight: bold;
-    color: #A1283B;
+    color: #bf616a;
     background-color: transparent;
-    border-left: 2px solid #A1283B;
+    border-left: 2px solid #bf616a;
 }
 
 /* Nav: second level (shown on .active) */
@@ -344,6 +373,11 @@ figcaption {
     .bs-docs-sidebar.affix {
         width: 263px;
     }
+}
+a {
+    color: #88c0d0;
+    text-decoration: none;
+
 }
 </style>"
   "The default style specification for exported HTML files.
@@ -1022,6 +1056,7 @@ style information."
 
 (define-obsolete-variable-alias 'org-twbs-style 'org-twbs-head "24.4")
 (defcustom org-twbs-head "
+<link href=\"https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700&display=swap\" rel=\"stylesheet\">
 <link  href=\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css\" rel=\"stylesheet\">
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js\"></script>
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js\"></script>"
@@ -1313,31 +1348,31 @@ INFO is a plist used as a communication channel."
      (format
       (org-twbs-close-tag "meta" "charset=\"%s\"" info)
       charset) "\n"
-      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-      "\n"
-      (org-twbs-close-tag "meta" "name=\"generator\" content=\"Org-mode\"" info)
-      "\n"
-      (and (org-string-nw-p author)
-           (concat
-            (org-twbs-close-tag "meta"
-                                (format "name=\"author\" content=\"%s\""
-                                        (funcall protect-string author))
-                                info)
-            "\n"))
-      (and (org-string-nw-p description)
-           (concat
-            (org-twbs-close-tag "meta"
-                                (format "name=\"description\" content=\"%s\"\n"
-                                        (funcall protect-string description))
-                                info)
-            "\n"))
-      (and (org-string-nw-p keywords)
-           (concat
-            (org-twbs-close-tag "meta"
-                                (format "name=\"keywords\" content=\"%s\""
-                                        (funcall protect-string keywords))
-                                info)
-            "\n")))))
+     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+     "\n"
+     (org-twbs-close-tag "meta" "name=\"generator\" content=\"Org-mode\"" info)
+     "\n"
+     (and (org-string-nw-p author)
+          (concat
+           (org-twbs-close-tag "meta"
+                               (format "name=\"author\" content=\"%s\""
+                                       (funcall protect-string author))
+                               info)
+           "\n"))
+     (and (org-string-nw-p description)
+          (concat
+           (org-twbs-close-tag "meta"
+                               (format "name=\"description\" content=\"%s\"\n"
+                                       (funcall protect-string description))
+                               info)
+           "\n"))
+     (and (org-string-nw-p keywords)
+          (concat
+           (org-twbs-close-tag "meta"
+                               (format "name=\"keywords\" content=\"%s\""
+                                       (funcall protect-string keywords))
+                               info)
+           "\n")))))
 
 (defun org-twbs--build-head (info)
   "Return information for the <head>..</head> of the HTML output.
@@ -1491,6 +1526,9 @@ holding export options."
                (or link-home link-up))))
    ;; Preamble.
    (org-twbs--build-pre/postamble 'preamble info)
+   ;; Document title.
+   (let ((title (plist-get info :title)))
+     (format "<h1 class=\"title\">%s</h1>\n" (org-export-data (or title "") info)))
    ;; Document contents.
    (format "<%s id=\"%s\" class=\"%s\">\n"
            (nth 1 (assq 'content org-twbs-divs))
@@ -1500,9 +1538,6 @@ holding export options."
    "<div class=\"row\">"
    (if (plist-get info :with-toc) "<div class=\"col-md-9\">"
      "<div class=\"col-md-12\">")
-   ;; Document title.
-   (let ((title (plist-get info :title)))
-     (format "<h1 class=\"title\">%s</h1>\n" (org-export-data (or title "") info)))
    contents
    "</div>"
    ;; Table of contents.

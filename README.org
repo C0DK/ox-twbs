@@ -2,7 +2,7 @@
 
 ** Summary
 
-Export [[http://orgmode.org/][org-mode]] docs as HTML compatible with [[http://getbootstrap.com/][Twitter Bootstrap]].
+Export [[http://orgmode.org/][org-mode]] docs as HTML compatible with [[http://getbootstrap.com/][Twitter Bootstrap]], utilizing the [[https://www.nordtheme.com][nord theme]].
 
 ** Example
 
@@ -132,7 +132,7 @@ projects using the ~:html-head~ property.
 
 Contributions are welcome! A list of potential fixes and enhancements
 follows:
-
+- Make possible to supply a style.css
 - Allow users to more easily add a Twitter Bootstrap theme
 - Document areas where this package deviates from org-mode manual on
   [[http://orgmode.org/manual/HTML-export.html#HTML-export][HTML export]]
